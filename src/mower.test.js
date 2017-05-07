@@ -132,4 +132,26 @@ GGADAG`;
     expect(currentProject.mowers[1].y).toBe(4);
     expect(currentProject.mowers[1].orientation).toBe('W');
   });
+
+  it('moves all mowers', () => {
+    const input = `4 4
+2 1 N
+AGAAADA
+3 3 E
+GGADAG
+0 0 S
+AAADAD`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].x).toBe(0);
+    expect(currentProject.mowers[0].y).toBe(3);
+    expect(currentProject.mowers[0].orientation).toBe('N');
+    expect(currentProject.mowers[1].x).toBe(2);
+    expect(currentProject.mowers[1].y).toBe(4);
+    expect(currentProject.mowers[1].orientation).toBe('W');
+    expect(currentProject.mowers[2].x).toBe(0);
+    expect(currentProject.mowers[2].y).toBe(0);
+    expect(currentProject.mowers[2].orientation).toBe('N');
+  });
 });

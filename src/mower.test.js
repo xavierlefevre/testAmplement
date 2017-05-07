@@ -99,4 +99,20 @@ AADAADADDA`;
     expect(currentProject.mowers[0].x).toBe(1);
     expect(currentProject.mowers[0].orientation).toBe('W');
   });
+
+  it('takes into account a small lawn bounderies when it moves', () => {
+    const input = `2 2
+2 1 N
+ADAGA
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].y).not.toBe(3);
+    expect(currentProject.mowers[0].y).toBe(2);
+    expect(currentProject.mowers[0].x).not.toBe(3);
+    expect(currentProject.mowers[0].x).toBe(2);
+    expect(currentProject.mowers[0].orientation).toBe('N');
+  });
 });

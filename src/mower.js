@@ -45,11 +45,11 @@ class Mower {
         this.mowers[0].orientation = cardinalIndex > 0 ? cardinalPoints[cardinalIndex - 1] : cardinalPoints[3];
       else if (sequenceValue === 'D')
         this.mowers[0].orientation = cardinalIndex < 3 ? cardinalPoints[cardinalIndex + 1] : cardinalPoints[0];
-      else {
-        if (this.mowers[0].orientation === 'N') this.mowers[0].y++;
-        else if (this.mowers[0].orientation === 'E') this.mowers[0].x++;
-        else if (this.mowers[0].orientation === 'S') this.mowers[0].y--;
-        else this.mowers[0].x--;
+      else if (sequenceValue === 'A') {
+        if (this.mowers[0].orientation === 'N' && this.mowers[0].y < this.lawn[1]) this.mowers[0].y++;
+        else if (this.mowers[0].orientation === 'E' && this.mowers[0].x < this.lawn[0]) this.mowers[0].x++;
+        else if (this.mowers[0].orientation === 'S' && this.mowers[0].y > 0) this.mowers[0].y--;
+        else if (this.mowers[0].orientation === 'W' && this.mowers[0].x > 0) this.mowers[0].x--;
       }
     });
   }

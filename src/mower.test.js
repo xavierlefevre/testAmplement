@@ -50,18 +50,32 @@ GADADDA`;
 });
 
 describe('mower movement logic', () => {
-  const input = `5 5
+  it('applies the first "G" movement from the sequence of the first mower', () => {
+    const input = `5 5
 1 2 N
 G
 3 3 E
 AADAADADDA`;
-
-  it('applies the first movement from the sequence of the first mower', () => {
     const currentProject = new Mower(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers).toEqual([
       { x: 1, y: 2, orientation: 'W', sequence: ['G'] },
+      { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
+    ]);
+  });
+
+  it('applies the second "D" movement from the sequence of the first mower', () => {
+    const input = `5 5
+1 2 N
+GD
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers).toEqual([
+      { x: 1, y: 2, orientation: 'N', sequence: ['G', 'D'] },
       { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
     ]);
   });

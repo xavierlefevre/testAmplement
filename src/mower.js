@@ -43,6 +43,8 @@ class Mower {
       const cardinalIndex = cardinalPoints.findIndex(element => this.mowers[0].orientation === element);
       if (sequenceValue === 'G') {
         this.mowers[0].orientation = cardinalIndex > 0 ? cardinalPoints[cardinalIndex - 1] : cardinalPoints[3];
+      } else if (sequenceValue === 'D') {
+        this.mowers[0].orientation = cardinalIndex < 3 ? cardinalPoints[cardinalIndex + 1] : cardinalPoints[0];
       }
     });
   }

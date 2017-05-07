@@ -95,8 +95,8 @@ AADAADADDA`;
     const currentProject = new Mower(input);
     currentProject.moveMowers();
 
-    expect(currentProject.mowers[0].y).toBe(3);
     expect(currentProject.mowers[0].x).toBe(1);
+    expect(currentProject.mowers[0].y).toBe(3);
     expect(currentProject.mowers[0].orientation).toBe('W');
   });
 
@@ -109,10 +109,27 @@ AADAADADDA`;
     const currentProject = new Mower(input);
     currentProject.moveMowers();
 
-    expect(currentProject.mowers[0].y).not.toBe(3);
-    expect(currentProject.mowers[0].y).toBe(2);
     expect(currentProject.mowers[0].x).not.toBe(3);
     expect(currentProject.mowers[0].x).toBe(2);
+    expect(currentProject.mowers[0].y).not.toBe(3);
+    expect(currentProject.mowers[0].y).toBe(2);
     expect(currentProject.mowers[0].orientation).toBe('N');
+  });
+
+  it('moves the two first mowers', () => {
+    const input = `4 4
+2 1 N
+AGAAADA
+3 3 E
+GGADAG`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].x).toBe(0);
+    expect(currentProject.mowers[0].y).toBe(3);
+    expect(currentProject.mowers[0].orientation).toBe('N');
+    expect(currentProject.mowers[1].x).toBe(2);
+    expect(currentProject.mowers[1].y).toBe(4);
+    expect(currentProject.mowers[1].orientation).toBe('W');
   });
 });

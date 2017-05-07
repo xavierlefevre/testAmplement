@@ -1,22 +1,22 @@
-const Mower = require('./mower');
+const MowerJob = require('./mower-job');
 
 describe('mower init logic', () => {
   it('generates the lawn', () => {
     const input = `5 5`;
-    expect(new Mower(input).lawn).toEqual([5, 5]);
+    expect(new MowerJob(input).lawn).toEqual([5, 5]);
   });
 
   it('positions the first mower', () => {
     const input = `5 5
 1 2 N`;
-    expect(new Mower(input).mowers).toEqual([{ x: 1, y: 2, orientation: 'N' }]);
+    expect(new MowerJob(input).mowers).toEqual([{ x: 1, y: 2, orientation: 'N' }]);
   });
 
   it('adds the movement sequence of the first mower', () => {
     const input = `5 5
 1 2 N
 GAGAGAGAA`;
-    expect(new Mower(input).mowers).toEqual([
+    expect(new MowerJob(input).mowers).toEqual([
       { x: 1, y: 2, orientation: 'N', sequence: ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'A'] },
     ]);
   });
@@ -27,7 +27,7 @@ GAGAGAGAA`;
 GAGAGAGAA
 3 3 E
 AADAADADDA`;
-    expect(new Mower(input).mowers).toEqual([
+    expect(new MowerJob(input).mowers).toEqual([
       { x: 1, y: 2, orientation: 'N', sequence: ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'A'] },
       { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
     ]);
@@ -41,7 +41,7 @@ GAGAGAGAA
 AADAADADDA
 2 1 W
 GADADDA`;
-    expect(new Mower(input).mowers).toEqual([
+    expect(new MowerJob(input).mowers).toEqual([
       { x: 1, y: 2, orientation: 'N', sequence: ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'A'] },
       { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
       { x: 2, y: 1, orientation: 'W', sequence: ['G', 'A', 'D', 'A', 'D', 'D', 'A'] },
@@ -56,7 +56,7 @@ describe('mower movement logic', () => {
 G
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].orientation).toBe('W');
@@ -68,7 +68,7 @@ AADAADADDA`;
 GD
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].orientation).toBe('N');
@@ -80,7 +80,7 @@ AADAADADDA`;
 A
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].y).toBe(3);
@@ -92,7 +92,7 @@ AADAADADDA`;
 ADAGGA
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].x).toBe(1);
@@ -106,7 +106,7 @@ AADAADADDA`;
 ADAGA
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].x).not.toBe(3);
@@ -122,7 +122,7 @@ AADAADADDA`;
 AGAAADA
 3 3 E
 GGADAG`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].x).toBe(0);
@@ -141,7 +141,7 @@ AGAAADA
 GGADAG
 0 0 S
 AAADAD`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].x).toBe(0);
@@ -163,7 +163,7 @@ describe('outputs the right informations', () => {
 GAGAGAGAA
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
 
     expect(currentProject.mowers[0].x).toBe(1);
@@ -180,7 +180,7 @@ AADAADADDA`;
 GAGAGAGAA
 3 3 E
 AADAADADDA`;
-    const currentProject = new Mower(input);
+    const currentProject = new MowerJob(input);
     currentProject.moveMowers();
     currentProject.outputPositions();
 

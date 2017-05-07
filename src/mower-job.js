@@ -29,7 +29,7 @@ const retrieveMowers = input => {
   return mowers;
 };
 
-class Mower {
+class MowerJob {
   constructor(input) {
     this.lawn;
     this.mowers = [];
@@ -68,4 +68,4 @@ class Mower {
   }
 }
 
-module.exports = Mower;
+module.exports = MowerJob;

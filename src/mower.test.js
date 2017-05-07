@@ -59,10 +59,7 @@ AADAADADDA`;
     const currentProject = new Mower(input);
     currentProject.moveMowers();
 
-    expect(currentProject.mowers).toEqual([
-      { x: 1, y: 2, orientation: 'W', sequence: ['G'] },
-      { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
-    ]);
+    expect(currentProject.mowers[0].orientation).toBe('W');
   });
 
   it('applies the second "D" movement from the sequence of the first mower', () => {
@@ -74,9 +71,32 @@ AADAADADDA`;
     const currentProject = new Mower(input);
     currentProject.moveMowers();
 
-    expect(currentProject.mowers).toEqual([
-      { x: 1, y: 2, orientation: 'N', sequence: ['G', 'D'] },
-      { x: 3, y: 3, orientation: 'E', sequence: ['A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A'] },
-    ]);
+    expect(currentProject.mowers[0].orientation).toBe('N');
+  });
+
+  it('changes the position of the first mower with the "A"', () => {
+    const input = `5 5
+1 2 N
+A
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].y).toBe(3);
+  });
+
+  it('changes the position of the first mower with the a combination', () => {
+    const input = `5 5
+1 2 N
+ADAGGA
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].y).toBe(3);
+    expect(currentProject.mowers[0].x).toBe(1);
+    expect(currentProject.mowers[0].orientation).toBe('W');
   });
 });

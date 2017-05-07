@@ -41,10 +41,15 @@ class Mower {
   moveMowers() {
     this.mowers[0].sequence.forEach((sequenceValue, sequenceValueIndex) => {
       const cardinalIndex = cardinalPoints.findIndex(element => this.mowers[0].orientation === element);
-      if (sequenceValue === 'G') {
+      if (sequenceValue === 'G')
         this.mowers[0].orientation = cardinalIndex > 0 ? cardinalPoints[cardinalIndex - 1] : cardinalPoints[3];
-      } else if (sequenceValue === 'D') {
+      else if (sequenceValue === 'D')
         this.mowers[0].orientation = cardinalIndex < 3 ? cardinalPoints[cardinalIndex + 1] : cardinalPoints[0];
+      else {
+        if (this.mowers[0].orientation === 'N') this.mowers[0].y++;
+        else if (this.mowers[0].orientation === 'E') this.mowers[0].x++;
+        else if (this.mowers[0].orientation === 'S') this.mowers[0].y--;
+        else this.mowers[0].x--;
       }
     });
   }

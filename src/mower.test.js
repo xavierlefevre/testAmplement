@@ -155,3 +155,38 @@ AAADAD`;
     expect(currentProject.mowers[2].orientation).toBe('N');
   });
 });
+
+describe('outputs the right informations', () => {
+  it('passes the test', () => {
+    const input = `5 5
+1 2 N
+GAGAGAGAA
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+
+    expect(currentProject.mowers[0].x).toBe(1);
+    expect(currentProject.mowers[0].y).toBe(3);
+    expect(currentProject.mowers[0].orientation).toBe('N');
+    expect(currentProject.mowers[1].x).toBe(5);
+    expect(currentProject.mowers[1].y).toBe(1);
+    expect(currentProject.mowers[1].orientation).toBe('E');
+  });
+
+  it('outputs the right result', () => {
+    const input = `5 5
+1 2 N
+GAGAGAGAA
+3 3 E
+AADAADADDA`;
+    const currentProject = new Mower(input);
+    currentProject.moveMowers();
+    currentProject.outputPositions();
+
+    expect(currentProject.output).toBe(
+      `1 3 N
+5 1 E`
+    );
+  });
+});

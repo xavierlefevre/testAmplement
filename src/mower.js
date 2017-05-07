@@ -31,7 +31,10 @@ const retrieveMowers = input => {
 
 class Mower {
   constructor(input) {
+    this.lawn;
     this.mowers = [];
+    this.output = '';
+
     const inputLines = input.split('\n');
 
     this.lawn = retrieveLawn(inputLines);
@@ -53,6 +56,14 @@ class Mower {
           else if (mowerValue.orientation === 'W' && mowerValue.x > 0) mowerValue.x--;
         }
       });
+    });
+  }
+
+  outputPositions() {
+    const totalMowers = this.mowers.length;
+    this.mowers.forEach((mowerValue, mowerValueIndex) => {
+      this.output += mowerValue.x + ' ' + mowerValue.y + ' ' + mowerValue.orientation;
+      if (mowerValueIndex < totalMowers - 1) this.output += '\n';
     });
   }
 }

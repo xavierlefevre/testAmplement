@@ -1,3 +1,5 @@
+const cardinalPoints = ['N', 'E', 'S', 'W'];
+
 const retrieveLawn = input => input[0].split(' ').map(coordinate => parseInt(coordinate, 10));
 
 const retrieveMowers = input => {
@@ -20,7 +22,7 @@ const retrieveMowers = input => {
       });
       mowers.push(mowerPosition);
     } else {
-      mowers[mowersCount].sequence = input[lineIndex];
+      mowers[mowersCount].sequence = input[lineIndex].split('');
       mowersCount++;
     }
   });
@@ -34,6 +36,15 @@ class Mower {
 
     this.lawn = retrieveLawn(inputLines);
     if (inputLines[1]) this.mowers = retrieveMowers(inputLines);
+  }
+
+  moveMowers() {
+    this.mowers[0].sequence.forEach((sequenceValue, sequenceValueIndex) => {
+      const cardinalIndex = cardinalPoints.findIndex(element => this.mowers[0].orientation === element);
+      if (sequenceValue === 'G') {
+        this.mowers[0].orientation = cardinalIndex > 0 ? cardinalPoints[cardinalIndex - 1] : cardinalPoints[3];
+      }
+    });
   }
 }
 

@@ -2,15 +2,16 @@ const retrieveLawn = input => input[0].split(' ').map(coordinate => parseInt(coo
 
 const getFirstMowerPosition = input => {
   const mowerPosition = {};
-  input.split(' ').map((value, index) => {
+  input[1].split(' ').map((value, index) => {
     if (index === 0) {
       mowerPosition.x = parseInt(value, 10);
     } else if (index === 1) {
       mowerPosition.y = parseInt(value, 10);
     } else {
-      mowerPosition.o = value;
+      mowerPosition.orientation = value;
     }
   });
+  mowerPosition.sequence = input[2];
   return mowerPosition;
 };
 
@@ -20,7 +21,7 @@ class Mower {
     const inputLines = input.split('\n');
 
     this.lawn = retrieveLawn(inputLines);
-    this.mowers.push(getFirstMowerPosition(inputLines[1]));
+    inputLines[1] && this.mowers.push(getFirstMowerPosition(inputLines));
   }
 }
 

@@ -19,7 +19,7 @@ GAGAGAGAA`;
     expect(new Mower(input).mowers).toEqual([{ x: 1, y: 2, orientation: 'N', sequence: 'GAGAGAGAA' }]);
   });
 
-  it('retrieves the other mowers position and sequence', () => {
+  it("retrieves a second mower's position and sequence", () => {
     const input = `5 5
 1 2 N
 GAGAGAGAA
@@ -28,6 +28,21 @@ AADAADADDA`;
     expect(new Mower(input).mowers).toEqual([
       { x: 1, y: 2, orientation: 'N', sequence: 'GAGAGAGAA' },
       { x: 3, y: 3, orientation: 'E', sequence: 'AADAADADDA' },
+    ]);
+  });
+
+  it("retrieves a third mower's position and sequence", () => {
+    const input = `5 5
+1 2 N
+GAGAGAGAA
+3 3 E
+AADAADADDA
+2 1 W
+GADADDA`;
+    expect(new Mower(input).mowers).toEqual([
+      { x: 1, y: 2, orientation: 'N', sequence: 'GAGAGAGAA' },
+      { x: 3, y: 3, orientation: 'E', sequence: 'AADAADADDA' },
+      { x: 2, y: 1, orientation: 'W', sequence: 'GADADDA' },
     ]);
   });
 });
